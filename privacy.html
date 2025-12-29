@@ -278,24 +278,26 @@
 
         <section>
             <h2>What We Collect</h2>
-            <p>We use <strong>Mixpanel</strong> for anonymous analytics to understand how the app is used and improve it. This includes:</p>
+            <p>We use <strong>Mixpanel</strong> (EU endpoint for GDPR compliance) for anonymous analytics to understand how the app is used and improve it. This includes:</p>
             <ul>
                 <li>App opens and screen views</li>
-                <li>Feature usage (e.g., "user completed a habit", "user started a timer")</li>
+                <li>Feature usage events (e.g., "habit completed", "timer started", "identity created")</li>
+                <li>Aggregate counts (total habits, total completions, streak milestones)</li>
+                <li>Settings changes (theme, notifications enabled/disabled)</li>
                 <li>Device type and OS version</li>
                 <li>App version</li>
             </ul>
-            <p>This data is <strong>anonymized</strong> and cannot be linked back to you personally. We do not collect the names of your habits, your identity labels, or any content you create.</p>
+            <p>This data is <strong>anonymized</strong> and cannot be linked back to you personally. We <strong>never</strong> collect the names of your habits, your identity labels, your motivations, or any content you create.</p>
         </section>
 
         <section>
             <h2>Push Notifications</h2>
-            <p>If you enable notifications, we use <strong>Expo Push Notifications</strong> to send you reminders. This requires:</p>
+            <p>If you enable notifications, we use <strong>Expo Push Notifications</strong> to send you local reminders (Daily Briefing and Streak Rescue). This requires:</p>
             <ul>
                 <li>A device push token (a random identifier for your device)</li>
-                <li>Your notification preferences</li>
+                <li>Your notification preferences (stored locally)</li>
             </ul>
-            <p>Push tokens are used solely to deliver notifications you've requested. You can disable notifications anytime in your device settings.</p>
+            <p>These are <strong>local notifications</strong> scheduled on your device—they don't require a server. Push tokens are used solely to deliver notifications you've requested. You can disable notifications anytime in Settings or your device settings.</p>
         </section>
 
         <section>
