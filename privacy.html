@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Atomic Streaks</title>
+    <style>
+        :root {
+            /* Dark Mode (Default) */
+            --background: #0F172A;
+            --surface: #1E293B;
+            --text: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --divider: #334155;
+            --accent: #22C55E;
+            --accent-hover: #10B981;
+        }
+        
+        [data-theme="light"] {
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --divider: #E2E8F0;
+            --accent: #22C55E;
+            --accent-hover: #10B981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: 12px;
+            padding: 0.6rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+        
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            display: none;
+        }
+        
+        [data-theme="light"] .theme-toggle .icon-moon {
+            display: block;
+        }
+        
+        [data-theme="dark"] .theme-toggle .icon-sun,
+        :root:not([data-theme]) .theme-toggle .icon-sun {
+            display: block;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--divider);
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            animation: flame 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes flame {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #10B981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
+        }
+        
+        section {
+            margin-bottom: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li::marker {
+            color: var(--accent);
+        }
+        
+        .highlight-box {
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, #10B981 50%, #3B82F6 100%);
+        }
+        
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+        
+        .contact-box {
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: inline-block;
+        }
+        
+        .contact-box a {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--divider);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        footer span {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">☀️</span>
+        <span class="icon-moon">🌙</span>
+    </button>
+
+    <div class="container">
+        <header>
+            <div class="logo">🔥</div>
+            <h1>Privacy Policy</h1>
+            <p class="subtitle">Atomic Streaks</p>
+            <p class="last-updated">Last updated: December 29, 2024</p>
+        </header>
+
+        <section>
+            <h2>The Short Version</h2>
+            <div class="highlight-box">
+                <p>Your habits are yours. All habit data stays on your device. We collect minimal analytics to improve the app, and that's it.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>What Data Stays on Your Device</h2>
+            <p>Atomic Streaks is built <strong>local-first</strong>. This means:</p>
+            <ul>
+                <li>Your habits, streaks, and completion history are stored only on your device</li>
+                <li>Your identity labels and personal goals never leave your phone</li>
+                <li>Timer sessions and focus data remain completely private</li>
+                <li>No account or sign-up required to use the app</li>
+            </ul>
+            <p>You can export your data anytime using the built-in backup feature. You own your data—we never have access to it.</p>
+        </section>
+
+        <section>
+            <h2>What We Collect</h2>
+            <p>We use <strong>Mixpanel</strong> for anonymous analytics to understand how the app is used and improve it. This includes:</p>
+            <ul>
+                <li>App opens and screen views</li>
+                <li>Feature usage (e.g., "user completed a habit", "user started a timer")</li>
+                <li>Device type and OS version</li>
+                <li>App version</li>
+            </ul>
+            <p>This data is <strong>anonymized</strong> and cannot be linked back to you personally. We do not collect the names of your habits, your identity labels, or any content you create.</p>
+        </section>
+
+        <section>
+            <h2>Push Notifications</h2>
+            <p>If you enable notifications, we use <strong>Expo Push Notifications</strong> to send you reminders. This requires:</p>
+            <ul>
+                <li>A device push token (a random identifier for your device)</li>
+                <li>Your notification preferences</li>
+            </ul>
+            <p>Push tokens are used solely to deliver notifications you've requested. You can disable notifications anytime in your device settings.</p>
+        </section>
+
+        <section>
+            <h2>What We Don't Do</h2>
+            <ul>
+                <li>We don't sell your data to anyone</li>
+                <li>We don't show you ads</li>
+                <li>We don't track your location</li>
+                <li>We don't access your contacts, photos, or other apps</li>
+                <li>We don't create advertising profiles</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Data Security</h2>
+            <p>Since your habit data is stored locally on your device, it's protected by your device's built-in security (passcode, Face ID, etc.). Analytics data transmitted to Mixpanel is encrypted in transit.</p>
+        </section>
+
+        <section>
+            <h2>Children's Privacy</h2>
+            <p>Atomic Streaks is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+        </section>
+
+        <section>
+            <h2>Changes to This Policy</h2>
+            <p>If we make significant changes to this policy, we'll update the "Last updated" date and notify users through the app.</p>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <p>Questions about this policy? Reach out:</p>
+            <div class="contact-box">
+                <a href="mailto:atomicstreaks.help@gmail.com">atomicstreaks.help@gmail.com</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 Atomic Streaks. Built with <span>🔥</span> for habit builders.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Check for saved theme or system preference
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+        
+        // Set initial theme
+        setTheme(getPreferredTheme());
+    </script>
+</body>
+</html>

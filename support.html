@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Atomic Streaks</title>
+    <style>
+        :root {
+            --background: #0F172A;
+            --surface: #1E293B;
+            --text: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --divider: #334155;
+            --accent: #22C55E;
+            --accent-hover: #10B981;
+        }
+        
+        [data-theme="light"] {
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --divider: #E2E8F0;
+            --accent: #22C55E;
+            --accent-hover: #10B981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: 12px;
+            padding: 0.6rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+        
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            display: none;
+        }
+        
+        [data-theme="light"] .theme-toggle .icon-moon {
+            display: block;
+        }
+        
+        [data-theme="dark"] .theme-toggle .icon-sun,
+        :root:not([data-theme]) .theme-toggle .icon-sun {
+            display: block;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--divider);
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #10B981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        section {
+            margin-bottom: 2rem;
+        }
+        
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text);
+            transition: background 0.2s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(34, 197, 94, 0.05);
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent);
+            transition: transform 0.2s ease;
+        }
+        
+        .faq-item.open .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-inner {
+            padding: 0 1.5rem 1.25rem 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .faq-answer-inner p {
+            margin-bottom: 0.75rem;
+        }
+        
+        .faq-answer-inner p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .faq-answer-inner code {
+            background: var(--background);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--accent);
+        }
+        
+        .contact-section {
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, #10B981 50%, #3B82F6 100%);
+        }
+        
+        .contact-section h2 {
+            margin-bottom: 0.75rem;
+        }
+        
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.875rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .contact-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .quick-link {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .quick-link:hover {
+            color: var(--accent);
+        }
+        
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--divider);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem;
+            }
+            
+            .faq-question {
+                padding: 1rem 1.25rem;
+                font-size: 0.95rem;
+            }
+            
+            .faq-answer-inner {
+                padding: 0 1.25rem 1rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">☀️</span>
+        <span class="icon-moon">🌙</span>
+    </button>
+
+    <div class="container">
+        <header>
+            <div class="logo">🔥</div>
+            <h1>Support</h1>
+            <p class="subtitle">Atomic Streaks</p>
+        </header>
+
+        <section>
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How do I create a new habit?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Tap the <strong>+</strong> button on the home screen. Give your habit a name, choose an identity it belongs to (like "Athlete" or "Reader"), and set your schedule. That's it—you're ready to start building your streak!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What happens if I miss a day?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Your streak resets to zero, but your total completion history is preserved. Remember: one missed day doesn't erase your progress. The goal is consistency over time, not perfection.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How do I back up my data?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Go to <strong>Settings → Data → Export</strong>. This creates a backup file you can save or share. To restore, use <strong>Settings → Data → Import</strong> and select your backup file.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Is my data synced to the cloud?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>No—Atomic Streaks is built <strong>local-first</strong>. All your habits and streaks stay on your device. This means your data is private and the app works offline. Cloud sync is planned for a future update.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How do I change notification times?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Go to <strong>Settings → Notifications</strong> to customize your Daily Briefing time (morning reminder) and Streak Rescue time (evening nudge for incomplete habits).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What are Identities?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Identities represent who you want to become—like "Athlete," "Reader," or "Early Riser." Each habit is tied to an identity. This isn't just organization; it's psychology. You're not just tracking workouts, you're <em>becoming</em> an Athlete.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How do I delete my data?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Go to <strong>Settings → Data → Clear All Data</strong>. This permanently deletes all habits, streaks, and settings from your device. Since we don't store your data on servers, there's nothing to delete on our end.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="contact-section">
+                <h2>Still need help?</h2>
+                <p>Can't find what you're looking for? Send us a message and we'll get back to you as soon as possible.</p>
+                <a href="mailto:atomicstreaks.help@gmail.com" class="contact-button">Contact Support</a>
+                <div class="quick-links">
+                    <a href="privacy.html" class="quick-link">Privacy Policy</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 Atomic Streaks. Built with 🔥 for habit builders.</p>
+        </footer>
+    </div>
+
+    <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+        
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('open');
+        }
+        
+        setTheme(getPreferredTheme());
+    </script>
+</body>
+</html>
